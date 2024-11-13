@@ -30,11 +30,17 @@ jobs:
       #     tar -xvf ./powershell-7.2.9-linux-x64.tar.gz -C /opt/microsoft/powershell/7
       #     ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
-      - name: Install Power BI PowerShell Module
-        run: |
-          pwsh -Command "Install-Module -Name MicrosoftPowerBIMgmt -Force -AllowClobber"
+            #Authenticate to Azure
+      - name: Login to Azure
+        uses: azure/login@v1
+        # with:
+        #   creds: ${{ secrets.Azure_Credential }}
 
-      # Step 3: Authenticate to Power BI using GitHub Secrets
+      # - name: Install Power BI PowerShell Module
+      #   run: |
+      #     pwsh -Command "Install-Module -Name MicrosoftPowerBIMgmt -Force -AllowClobber"
+
+      #Step 3: Authenticate to Power BI using GitHub Secrets
       - name: Authenticate to Power BI
         shell: pwsh
         run: |
@@ -42,11 +48,11 @@ jobs:
           $clientSecret = "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
           $tenantId = "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
           
-          Import-Module MicrosoftPowerBIMgmt
-          # Perform authentication using the above credentials
-          # Example: PowerShell script to authenticate
-          $token = Get-PowerBIAccessToken -ClientId $clientId -ClientSecret $clientSecret -TenantId $tenantId
-          Write-Host "Authentication Successful"
+      #     Import-Module MicrosoftPowerBIMgmt
+      #     # Perform authentication using the above credentials
+      #     # Example: PowerShell script to authenticate
+      #     $token = Get-PowerBIAccessToken 
+      #   Write-Host "Authentication Successful"
         
       # Step 4: Deploy the Power BI reports to the workspace
       - name: Power BI Workspace Deploy
