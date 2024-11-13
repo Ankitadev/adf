@@ -34,9 +34,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          clientId: "c15b611c-d346-4053-82c9-9dc4dce58b08"
-          clientSecret: "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
-          tenantId: "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
+          client-id: "c15b611c-d346-4053-82c9-9dc4dce58b08"
+          client-secret: "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
+          tenant-id: "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
 
       # - name: Install Power BI PowerShell Module
       #   run: |
