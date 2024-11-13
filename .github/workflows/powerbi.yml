@@ -14,18 +14,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install PowerShell
-        run: |
-          # Download and install PowerShell on Ubuntu
-          wget https://github.com/PowerShell/PowerShell/releases/download/v7.2.9/powershell-7.2.9-linux-x64.tar.gz
-          mkdir /opt/microsoft/powershell/7
-          tar -xvf ./powershell-7.2.9-linux-x64.tar.gz -C /opt/microsoft/powershell/7
-          ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+     # Step 2: Set up PowerShell to run Power BI related scripts
+      - name: Set up PowerShell
+        uses: PowerShell/setup-powershell@v2  # Corrected version
+        with:
+          version: '7.x'  # or any other PowerShell version you prefer
+          
+      # - name: Install PowerShell
+      #   run: |
+      #     # Download and install PowerShell on Ubuntu
+      #     wget https://github.com/PowerShell/PowerShell/releases/download/v7.2.9/powershell-7.2.9-linux-x64.tar.gz
+      #     mkdir /opt/microsoft/powershell/7
+      #     tar -xvf ./powershell-7.2.9-linux-x64.tar.gz -C /opt/microsoft/powershell/7
+      #     ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
       # Step 3: Authenticate to Power BI using GitHub Secrets
       - name: Authenticate to Power BI
         run: |
-          pwsh -Command |
+          # pwsh -Command |
           $clientId = "c15b611c-d346-4053-82c9-9dc4dce58b08"
           $clientSecret = "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
           $tenantId = "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
