@@ -33,8 +33,10 @@ jobs:
             #Authenticate to Azure
       - name: Login to Azure
         uses: azure/login@v1
-        # with:
-        #   creds: ${{ secrets.Azure_Credential }}
+        with:
+          clientId: "c15b611c-d346-4053-82c9-9dc4dce58b08"
+          clientSecret: "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
+          tenantId: "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
 
       # - name: Install Power BI PowerShell Module
       #   run: |
