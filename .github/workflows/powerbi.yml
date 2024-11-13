@@ -34,7 +34,7 @@ jobs:
         
       # Step 4: Deploy the Power BI reports to the workspace
       - name: Power BI Workspace Deploy
-        # uses: nathangiusti/Power-BI-Workspace-Deploy@v1.3
+        uses: nathangiusti/Power-BI-Workspace-Deploy@v1.3
         with:
           tenant_id: 'e4e34038-ea1f-4882-b6e8-ccd776459ca0'
           files: 'Power-BI/test_workbook.pbix'  # Files to deploy
