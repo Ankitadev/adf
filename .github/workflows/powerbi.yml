@@ -43,12 +43,12 @@ jobs:
       #     pwsh -Command "Install-Module -Name MicrosoftPowerBIMgmt -Force -AllowClobber"
 
       #Step 3: Authenticate to Power BI using GitHub Secrets
-      - name: Authenticate to Power BI
-        shell: pwsh
-        run: |
-          $client-id = "c15b611c-d346-4053-82c9-9dc4dce58b08"
-          $client-secret = "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
-          $tenant-id = "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
+      # - name: Authenticate to Power BI
+      #   shell: pwsh
+      #   run: |
+      #     $client-id = "c15b611c-d346-4053-82c9-9dc4dce58b08"
+      #     $client-secret = "rvA8Q~ekdJve89BS1F2liPyQOiJHJ2VwbIbsrb8M"
+      #     $tenant-id = "e4e34038-ea1f-4882-b6e8-ccd776459ca0"
           
       #     Import-Module MicrosoftPowerBIMgmt
       #     # Perform authentication using the above credentials
