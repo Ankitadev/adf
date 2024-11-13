@@ -16,9 +16,11 @@ jobs:
 
      # Step 2: Set up PowerShell to run Power BI related scripts
       - name: Set up PowerShell
-        uses: PowerShell/setup-powershell@v2  # Corrected version
+        uses: PowerShell/setup-pwsh@v2  # Corrected version
         with:
           version: '7.x'  # or any other PowerShell version you prefer
+
+          
           
       # - name: Install PowerShell
       #   run: |
