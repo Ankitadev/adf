@@ -18,7 +18,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pbixfile
-          path: './Adventure_works_Assingment1.pbix' # Ensure the path is correct
+          path: './Power-BI/test_workbook.pbix' # Ensure the path is correct
 
   PowerBi-CD:
     name: PowerBi CD
@@ -52,7 +52,7 @@ jobs:
           WORKSPACE_ID=${{ secrets.PBI_WORKSPACE_ID }}
           
           # Path to your .pbix file in the repository
-          PBIX_FILE_PATH="./Adventure_works_Assingment1.pbix"
+          PBIX_FILE_PATH="./Power-BI/test_workbook.pbix"
 
           # Import the PBIX file to Power BI Workspace
           curl -X POST \
