@@ -1,4 +1,4 @@
-name: PowerBi CI/CD Pipeline
+name: PowerBi CI/CD Pipeline windows
 
 on:
   push:
