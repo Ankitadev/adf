@@ -18,7 +18,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pbixfile
-          path: '.\Adventure_works_Assingment1.pbix' # Windows path syntax
+          path: 'Power-BI/test_workbook.pbix' # Windows path syntax
 
   PowerBi-CD:
     name: PowerBi CD
@@ -53,7 +53,7 @@ jobs:
           # Set variables
           $ACCESS_TOKEN = "${{ steps.auth.outputs.access_token }}"
           $WORKSPACE_ID = "${{ secrets.PBI_WORKSPACE_ID }}"
-          $PBIX_FILE_PATH = ".\Adventure_works_Assingment1.pbix" # Windows path
+          $PBIX_FILE_PATH = "Power-BI/test_workbook.pbix" # Windows path
 
           # Import the PBIX file to Power BI Workspace
           Invoke-RestMethod -Uri "https://api.powerbi.com/v1.0/myorg/groups/$WORKSPACE_ID/imports?datasetDisplayName=MyReport&nameConflict=CreateOrOverwrite" -Method Post -Headers @{
