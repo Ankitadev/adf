@@ -1,0 +1,65 @@
+name: PowerBI Reports Deployment Pipeline 
+
+on:
+    workflow_dispatch:
+    
+jobs:
+  PowerBi-CI:
+    name: PowerBi CI
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Upload PBIX File
+        id: upload_pbix
+        uses: actions/upload-artifact@v3
+        with:
+          name: pbixfile
+          path: '' 
+
+  PowerBi-CD:
+    name: PowerBi CD
+    runs-on: windows-latest
+    needs: PowerBi-CI
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Download PBIX File
+        uses: actions/download-artifact@v3
+        with:
+          name: pbixfile
+
+      - name: Power BI Authentication
+        id: auth
+        shell: pwsh
+        run: |
+          $response = Invoke-RestMethod -Uri "https://login.microsoftonline.com/${{ secrets.TENANT_ID }}/oauth2/v2.0/token" -Method Post -ContentType "application/x-www-form-urlencoded" -Body @{
+            grant_type    = "client_credentials"
+            client_id     = "${{ secrets.CLIENT_ID }}"
+            client_secret = "${{ secrets.CLIENT_SECRET }}"
+            scope         = "https://analysis.windows.net/powerbi/api/.default"
+          }
+          echo "::set-output name=access_token::$($response.access_token)"
+
+      - name: Deploy PBIX to Power BI Workspace
+        shell: pwsh 
+        run: |
+          # Set variables
+          $ACCESS_TOKEN = "${{ steps.auth.outputs.access_token }}"
+          $WORKSPACE_ID = "${{ secrets.QELNG_SAPPM_STG_ID }}"
+          $PBIX_FILE_PATH = " " 
+
+          # Import the PBIX file to Power BI Workspace
+          Invoke-RestMethod -Uri "https://api.powerbi.com/v1.0/myorg/groups/$WORKSPACE_ID/imports?datasetDisplayName=MyReport&nameConflict=CreateOrOverwrite" -Method Post -Headers @{
+            Authorization = "Bearer $ACCESS_TOKEN"
+          } -Form @{
+            file = Get-Item $PBIX_FILE_PATH
+          }
+
+      - name: Deployment Complete
+        shell: pwsh 
+        run: echo "Power BI deployment completed successfully!"
